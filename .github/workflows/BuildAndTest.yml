@@ -1,0 +1,17 @@
+name: GroupProject
+on: 
+  push:
+    branches:
+      - '*'
+  pull_request:
+    branches:
+      - '*'
+  workflow_dispatch:
+jobs:
+  BuildAndTest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: hello
+        shell: bash
+        run: echo "Hello World"
+        
