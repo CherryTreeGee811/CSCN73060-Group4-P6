@@ -1,6 +1,0 @@
-# ninja log v5
-29	3387	1737138965211378500	CMakeFiles/crow_lib.dir/src/utils/json_utils.cpp.o	bbe8ee27002d1a4d
-26	3536	1737138965338228200	CMakeFiles/crow_lib.dir/src/routes/routes.cpp.o	c1d45d2506511de
-3541	4038	1737138965853626500	libcrow_lib.a	f8f1dd5ea59cc7c9
-32	6120	1737138967926704700	CMakeFiles/crow_project.dir/src/main.cpp.o	4048b9b7a5a41dc7
-6127	8142	1737138969964663200	crow_project	d455b9c601d515d1
