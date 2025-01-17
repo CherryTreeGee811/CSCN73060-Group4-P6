@@ -1,0 +1,4 @@
+/SharedDocker/WebServer_P1/build/CMakeFiles/crow_lib.dir
+/SharedDocker/WebServer_P1/build/CMakeFiles/crow_project.dir
+/SharedDocker/WebServer_P1/build/CMakeFiles/edit_cache.dir
+/SharedDocker/WebServer_P1/build/CMakeFiles/rebuild_cache.dir
