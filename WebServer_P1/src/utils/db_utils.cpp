@@ -88,3 +88,58 @@ crow::json::wvalue Database::addBook(const crow::request& book) {
     crow::json::wvalue json = {{"status", "success"}};
     return json;
 }
+
+crow::json::wvalue Database::updateBook(const crow::request& book, const int id) {
+    auto request = crow::json::load(book.body);
+    std::string title = request["TITLE"].s();
+    std::string author = request["AUTHOR"].s();
+    std::string description = request["DESCRIPTION"].s();
+    const char* query = "UPDATE BOOKS SET TITLE = ?, AUTHOR = ?, DESCRIPTION = ? WHERE ID = ?";
+    sqlite3_stmt* statement;
+    if(sqlite3_prepare_v2(db, query, -1, &statement, nullptr) == SQLITE_OK) {
+        sqlite3_bind_text(statement, 1, title.c_str(), -1, SQLITE_STATIC);
+        sqlite3_bind_text(statement, 2, author.c_str(), -1, SQLITE_STATIC);
+        sqlite3_bind_text(statement, 3, description.c_str(), -1, SQLITE_STATIC);
+        sqlite3_bind_int(statement, 4, id);
+        if (sqlite3_step(statement) != SQLITE_DONE) {
+            return crow::json::wvalue{{"status", "Error updating book"}};
+        }
+    }
+
+    sqlite3_finalize(statement);
+    crow::json::wvalue json = {{"status", "success"}};
+    return json;
+}
+
+crow::json::wvalue Database::deleteBook(const int id) {
+    const char* query = "DELETE FROM BOOKS WHERE ID = ?";
+    sqlite3_stmt* statement;
+    if(sqlite3_prepare_v2(db, query, -1, &statement, nullptr) == SQLITE_OK) {
+        sqlite3_bind_int(statement, 1, id);
+        if (sqlite3_step(statement) != SQLITE_DONE) {
+            return crow::json::wvalue{{"status", "Error deleting book"}};
+        }
+    }
+
+    sqlite3_finalize(statement);
+    crow::json::wvalue json = {{"status", "success"}};
+    return json;
+}
+
+crow::json::wvalue Database::updateBookDescription(const crow::request& book, const int id) {
+    auto request = crow::json::load(book.body);
+    std::string description = request["DESCRIPTION"].s();
+    const char* query = "UPDATE BOOKS SET DESCRIPTION = ? WHERE ID = ?";
+    sqlite3_stmt* statement;
+    if(sqlite3_prepare_v2(db, query, -1, &statement, nullptr) == SQLITE_OK) {
+        sqlite3_bind_text(statement, 1, description.c_str(), -1, SQLITE_STATIC);
+        sqlite3_bind_int(statement, 2, id);
+        if (sqlite3_step(statement) != SQLITE_DONE) {
+            return crow::json::wvalue{{"status", "Error updating book description"}};
+        }
+    }
+
+    sqlite3_finalize(statement);
+    crow::json::wvalue json = {{"status", "success"}};
+    return json;
+}

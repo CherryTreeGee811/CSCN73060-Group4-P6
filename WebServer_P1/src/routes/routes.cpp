@@ -17,4 +17,22 @@ void setupRoutes(crow::SimpleApp& app, Database& db) {
             response = db.addBook(book);
             return response;
         });
+    CROW_ROUTE(app, "/update/<int>").methods("PUT"_method)
+        ([&db](const crow::request& book, const int& id) {
+            crow::json::wvalue response;
+            response = db.updateBook(book, id);
+            return response;
+        });
+    CROW_ROUTE(app, "/delete/<int>").methods("DELETE"_method)
+        ([&db](const int& id) {
+            crow::json::wvalue response;
+            response = db.deleteBook(id);
+            return response;
+        });
+    CROW_ROUTE(app, "/redescribe/<int>").methods("PATCH"_method)
+        ([&db](const crow::request& book, const int& id) {
+            crow::json::wvalue response;
+            response = db.updateBookDescription(book, id);
+            return response;
+        });
 }
