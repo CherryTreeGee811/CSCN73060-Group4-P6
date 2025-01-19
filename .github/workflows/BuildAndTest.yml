@@ -14,4 +14,3 @@ jobs:
       - name: Build and Run Library API
         shell: bash
         run: docker compose up -d
-        
