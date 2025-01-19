@@ -12,10 +12,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
-      - name: List runner directories contents
-        shell: bash
-        run: ls
         
       - name: Build and Run Library API
         shell: bash
