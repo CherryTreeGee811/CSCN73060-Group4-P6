@@ -1,0 +1,16 @@
+services:
+  library.api:
+    image: libraryapi
+    container_name: libraryapi
+    ports:
+      - "8080:8080"
+    build:
+      context: .
+      dockerfile: WebServer_P1/Dockerfile
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+    

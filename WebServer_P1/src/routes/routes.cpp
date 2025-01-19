@@ -35,4 +35,11 @@ void setupRoutes(crow::SimpleApp& app, Database& db) {
             response = db.updateBookDescription(book, id);
             return response;
         });
+    CROW_ROUTE(app, "/health").methods("GET"_method)
+        ([]() {
+            crow::json::wvalue response;
+            response["status"] = "healthy";
+            return response;
+        });
+    
 }
