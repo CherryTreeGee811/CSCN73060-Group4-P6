@@ -5,7 +5,7 @@ EXPOSE 8080
 
 # Use another container for creating the binaries
 FROM alpine:latest AS build
-RUN apk add --no-cache asio-dev g++ cmake ninja
+RUN apk add --no-cache asio-dev g++ cmake ninja sqlite sqlite-dev
 WORKDIR /src
 COPY . .
 RUN mkdir -p build
@@ -15,6 +15,6 @@ RUN cmake --build build
 # Add compiled binaries to base image to create final image
 FROM base AS final
 WORKDIR /app
-RUN apk add --no-cache libstdc++ libgcc
+RUN apk add --no-cache libstdc++ libgcc sqlite-dev sqlite
 COPY --from=build /src/build/crow_project .
 CMD ["./crow_project"]

@@ -19,6 +19,8 @@ add_library(crow_lib ${ROUTES_SRC} ${UTILS_SRC})
 # Include directories for the shared library
 target_include_directories(crow_lib PUBLIC include third_party/crow)
 
+target_link_libraries(crow_lib PRIVATE sqlite3)
+
 # Main executable
 add_executable(crow_project ${MAIN_SRC})
 
