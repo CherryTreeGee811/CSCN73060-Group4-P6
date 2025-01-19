@@ -11,7 +11,8 @@ jobs:
   BuildAndTest:
     runs-on: ubuntu-latest
     steps:
-      - name: hello
-        shell: bash
-        run: echo "Hello World"
+      - uses: actions/checkout@v4
         
+      - name: Build and Run Library API
+        shell: bash
+        run: docker compose up -d
