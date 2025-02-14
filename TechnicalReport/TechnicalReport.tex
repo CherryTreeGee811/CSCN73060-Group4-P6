@@ -1,0 +1,146 @@
+\documentclass[a4paper, 12pt]{article}
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{setspace}
+\usepackage{indentfirst}
+\usepackage{titlesec}
+\usepackage{titling}
+\usepackage{csquotes}
+
+% APA style citation package
+\usepackage[style=authoryear-ibid, backend=biber, citestyle=authoryear-comp]{biblatex}
+\addbibresource{references.bib}
+
+% apa @ conestoga in line style
+\DeclareCiteCommand{\parencite}
+  {\usebibmacro{prenote}}
+  {(\printnames{labelname}\addcomma\space\printdate}
+  {\addcomma\space}
+  {\usebibmacro{postnote})}
+
+% Page Settings
+\geometry{margin=2.54cm}
+\doublespacing
+
+% hyperlink setup
+\hypersetup{
+    hidelinks=true
+}
+
+% indentation
+\setlength{\parindent}{1em}
+
+% Define Heading Level 1 (centered, bold, title case)
+\titleformat{\section} % Section = Heading Level 1
+  {\centering\bfseries\Large} % Centered and bold
+  {} % No section number
+  {0pt} % No indent
+  {} % No additional formatting for the title text
+
+% Define Heading Level 2 (left-aligned, bold, title case)
+\titleformat{\subsection} % Subsection = Heading Level 2
+  {\bfseries\large} % Left-aligned and bold
+  {} % No subsection number
+  {0pt} % No indent
+  {} % No additional formatting for the title text
+
+% Define Heading Level 3 (left-aligned, bold & italic, title case)
+\titleformat{\subsubsection} % Subsubsection = Heading Level 3
+  {\bfseries\itshape\normalsize} % Left-aligned, bold, italic
+  {} % No subsubsection number
+  {0pt} % No indent
+  {} % No additional formatting for the title text
+
+% Define paper variables
+\newcommand{\studentname}{Group 4: Isaiah Andrews, Joel Regi Abraham, Salah Salame, Jonathan Taylor}
+\newcommand{\affiliation}{Applied Computer Science \& IT, Conestoga College}
+\newcommand{\course}{CSCN 73060: Project VI: Software Efficiency and Performance}
+\newcommand{\instructor}{Gurpreet Kaur}
+\newcommand{\duedate}{\today}
+\newcommand{\maintitle}{Performance Technical Report}
+\newcommand{\subtitle}{libraryapi}
+
+% Define a command to create the title page
+\newcommand{\conestogatitlepage}{
+    % \pagestyle{fancy}
+    \thispagestyle{plain}
+    \fancypagestyle{plain}{
+        \fancyhf{}
+        \renewcommand{\headrulewidth}{0pt}
+        \fancyhead[R]{\thepage}
+    }
+
+    \vspace*{3\baselineskip}
+    \begin{center}
+        {\bfseries \maintitle \\ \subtitle}
+        \vspace*{\baselineskip} \\
+        \studentname \\
+        \affiliation \\
+        \course \\
+        \instructor \\
+        \duedate \\
+    \end{center}
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\leftmark}
+\fancyhead[R]{\thepage}
+
+\begin{document}
+
+% Title Page
+\conestogatitlepage
+\newpage
+
+% Table of Contents
+\tableofcontents
+\newpage
+
+Abstract-TBD
+
+\section{Introduction}
+TBD
+
+\section{Test Design}
+
+\subsection{Subsection \#1}
+TBD
+\subsection{Subsection \#2}
+TBD
+\subsection{Subsection \#3}
+TBD
+\subsection{Subsection \#4}
+TBD
+
+\section{Results}
+
+\subsection{Subsection \#1}
+TBD
+\subsection{Subsection \#2}
+TBD
+\subsection{Subsection \#3}
+TBD
+\subsection{Subsection \#4}
+TBD
+
+\newpage
+
+\section{Conclusion \& Future Work}
+
+TBD
+
+\newpage
+
+\nocite{becona2022}
+\phantomsection
+\printbibliography[heading=bibintoc]
+
+
+\end{document}
