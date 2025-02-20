@@ -2,3 +2,10 @@
 WebServer_P1/build
 WebServer_P1/.cache
 WebServer_P1/results.txt
+
+TechnicalReport/*.log
+TechnicalReport/*.fls
+TechnicalReport/*.synctex.gz
+TechnicalReport/*.aux
+TechnicalReport/*.fdb_latexmk
+TechnicalReport/*.out
