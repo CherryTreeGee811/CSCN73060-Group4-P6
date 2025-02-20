@@ -49,20 +49,26 @@ void Database::seedBookTableWithSampleData(void) {
 }
 
 
-crow::json::wvalue Database::getBooks(void) {
-    const char* query = "SELECT * FROM BOOKS";
+crow::json::wvalue Database::getBooks(int page, const int limit) {
+    // Calculate offset
+    int offset = (page - 1) * limit;
+    const char* query = "SELECT * FROM BOOKS LIMIT ? OFFSET ?;";
     sqlite3_stmt* statement;
-    sqlite3_prepare_v2(db, query, -1, &statement, nullptr);
     std::vector<crow::json::wvalue> books;
-    while(sqlite3_step(statement) == SQLITE_ROW) {
-        crow::json::wvalue book;
-        book["ID"] = sqlite3_column_int(statement, 0);
-        book["TITLE"] = reinterpret_cast<const char*>(sqlite3_column_text(statement, 1));
-        book["AUTHOR"] = reinterpret_cast<const char*>(sqlite3_column_text(statement, 2));
-        book["DESCRIPTION"] = reinterpret_cast<const char*>(sqlite3_column_text(statement, 3));
-        books.push_back(std::move(book));
+    if(sqlite3_prepare_v2(db, query, -1, &statement, nullptr) == SQLITE_OK) {
+        sqlite3_bind_int(statement, 1, limit);
+        sqlite3_bind_int(statement, 2, offset);
+        
+        while(sqlite3_step(statement) == SQLITE_ROW) {
+            crow::json::wvalue book;
+            book["ID"] = sqlite3_column_int(statement, 0);
+            book["TITLE"] = reinterpret_cast<const char*>(sqlite3_column_text(statement, 1));
+            book["AUTHOR"] = reinterpret_cast<const char*>(sqlite3_column_text(statement, 2));
+            book["DESCRIPTION"] = reinterpret_cast<const char*>(sqlite3_column_text(statement, 3));
+            books.push_back(std::move(book));
+        }
+        sqlite3_finalize(statement);
     }
-    sqlite3_finalize(statement);
     crow::json::wvalue json = std::move(books);
     return json;
 }
