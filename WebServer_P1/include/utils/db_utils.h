@@ -11,7 +11,7 @@ class Database {
 
         void createBookTable(void);
         void seedBookTableWithSampleData(void);
-        crow::json::wvalue getBooks(void);
+        crow::json::wvalue getBooks(int page, const int limit);
         crow::json::wvalue addBook(const crow::request& book);
         crow::json::wvalue updateBook(const crow::request& book, const int id);
         crow::json::wvalue deleteBook(const int id);

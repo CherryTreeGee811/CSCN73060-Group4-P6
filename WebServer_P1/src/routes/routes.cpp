@@ -6,9 +6,24 @@
 
 void setupRoutes(crow::SimpleApp& app, Database& db) {
     CROW_ROUTE(app, "/")
-        ([&db]() {
+        ([&db](crow::request pageNumber) {      
             crow::json::wvalue response;
-            response = db.getBooks();
+            
+            // Specify how many books should be displayed on the page
+            const int limit = 10;
+            int page = 1;
+
+            // Get page value from url if it is specified as a parameter
+            if (pageNumber.url_params.get("page") != nullptr) {
+                page = std::stoi(pageNumber.url_params.get("page"));
+                
+                if (page < 1) {
+                    // If page is less than 1 this is incorrect
+                    // We'll ignore if this is the case and make the page number 1
+                    page = 1;
+                }
+            }
+            response = db.getBooks(page, limit);
             return response;
         });
     CROW_ROUTE(app, "/add").methods("POST"_method)
