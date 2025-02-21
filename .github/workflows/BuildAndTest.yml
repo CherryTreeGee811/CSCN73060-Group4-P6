@@ -26,13 +26,13 @@ jobs:
         run: |
           cd UserInterface
           python -m pip install -r requirements.txt
-          pyinstaller --onefile client.py
+          pyinstaller --name LibraryClient --onefile client.py
       
       - name: Make Linux Binary Available
         uses: actions/upload-artifact@v4
         with:
-          name: exe
-          path: ./UserInterface/dist/client
+          name: Linux_x64
+          path: ./UserInterface/dist/LibraryClient
 
   BuildClientWindows:
     runs-on: windows-latest
@@ -48,10 +48,10 @@ jobs:
         run: |
           cd UserInterface
           python -m pip install -r requirements.txt
-          pyinstaller --onefile client.py
+          pyinstaller --name LibraryClient --onefile client.py
 
       - name: Make Windows Binary Available
         uses: actions/upload-artifact@v4
         with:
-          name: exe
-          path: ./UserInterface/dist/client.exe
+          name: Windows_x64
+          path: ./UserInterface/dist/LibraryClient
