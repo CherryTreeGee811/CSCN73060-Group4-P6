@@ -29,9 +29,13 @@ jobs:
           pyinstaller --onefile client.py
           ls
           
-      - name: See working directory
+      - name: See working directory and list
         shell: bash
-        run: pwd
+        run: |
+          pwd
+          ls
+          cd dist
+          ls
       
       - name: Make compiled EXE available
         uses: actions/upload-artifact@v4
