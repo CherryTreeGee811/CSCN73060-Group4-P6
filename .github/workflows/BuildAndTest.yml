@@ -27,6 +27,11 @@ jobs:
           cd UserInterface
           python -m pip install -r requirements.txt
           pyinstaller --onefile client.py
+          ls
+          
+      - name: See working directory
+        shell: bash
+        run: pwd
       
       - name: Make compiled EXE available
         uses: actions/upload-artifact@v4
