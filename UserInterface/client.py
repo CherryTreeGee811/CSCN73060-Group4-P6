@@ -125,6 +125,6 @@ def menu():
             case _:
                 print("Invalid choice provided!! Please try again.")
 
-if __name__ == "__main__":
+if __name__ == "__client__":
     print("Welcome to the User Interface for the Library API")
     menu()
