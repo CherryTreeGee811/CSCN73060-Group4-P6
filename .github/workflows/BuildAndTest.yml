@@ -21,40 +21,30 @@ jobs:
         shell: bash
         run: docker compose up -d
 
-      - name: Compile Python Binary
+      - name: Compile Linux Python Binary From Source
         shell: bash
         run: |
           cd UserInterface
           python -m pip install -r requirements.txt
           pyinstaller --onefile client.py
           ls dist
+
+      - name: Compile Windows Python Binary From Source
+        shell: bash
+        run: |
+          sudo apt install wine -y
+          cd UserInterface
+          wine pyinstaller --onefile client.py
+          ls dist
       
-      - name: Make Binary Available
+      - name: Make Linux Binary Available
         uses: actions/upload-artifact@v4
         with:
           name: exe
           path: ./UserInterface/dist/client
-          
-  BuildAndTestWindows:
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v4
-      
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.13'
-          
-      - name: Build and Run Library API
-        run: docker compose up -d
 
-      - name: Compile Python EXE
-        run: |
-          cd UserInterface
-          python -m pip install -r requirements.txt
-          pyinstaller --onefile client.py
-          
-      - name: Make EXE Available
+      - name: Make Windows Binary Available
         uses: actions/upload-artifact@v4
         with:
           name: exe
-          path: ./UserInterface/dist/client.exe
+          path: ./UserInterface/dist/client
