@@ -48,16 +48,15 @@ jobs:
         shell: bash
         run: docker compose up -d
 
-      - name: Compile Python Binary
+      - name: Compile Python EXE
         shell: bash
         run: |
           cd UserInterface
           python -m pip install -r requirements.txt
           pyinstaller --onefile client.py
-          ls dist
           
-      - name: Make Binary Available
+      - name: Make EXE Available
         uses: actions/upload-artifact@v4
         with:
           name: exe
-          path: ./UserInterface/dist/client
+          path: ./UserInterface/dist/client.exe
