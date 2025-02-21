@@ -118,6 +118,8 @@ def menu():
                 add_book()
             case 'u':
                 update_book()
+            case 'u':
+                delete_book()
             case 'r':
                 redescribe_book()
             case 'q':
