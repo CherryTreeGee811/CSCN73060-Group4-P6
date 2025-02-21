@@ -12,7 +12,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        
+      
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13' 
+    
       - name: Build and Run Library API
         shell: bash
         run: docker compose up -d
+
+      - name: Generate Python EXE
+        shell: bash
+        run: |
+          cd UserInterface
+          python -m pip install -r requirements.txt
+          pyinstaller --onefile main.py
+      
+      - name: Make compiled EXE available
+        uses: actions/upload-artifact@v4
+        with:
+          name: exe
+          path: ./UserInterface/dist/main.exe
