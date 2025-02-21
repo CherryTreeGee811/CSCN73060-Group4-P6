@@ -20,7 +20,7 @@ def redescribe_book():
     if response.status_code != 200:
         print("Some error occurred when trying to redescribe book!")
     else:
-        print("Book was added successfully")
+        print("Book was redescribed successfully")
 
 
 def delete_book():
@@ -54,7 +54,7 @@ def update_book():
     if response.status_code != 200:
         print("Some error occurred when trying to update book!")
     else:
-        print("Book was added successfully")
+        print("Book was updated successfully")
 
 
 def add_book():
