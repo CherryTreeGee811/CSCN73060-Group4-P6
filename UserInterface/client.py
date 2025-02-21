@@ -118,7 +118,7 @@ def menu():
                 add_book()
             case 'u':
                 update_book()
-            case 'u':
+            case 'd':
                 delete_book()
             case 'r':
                 redescribe_book()
