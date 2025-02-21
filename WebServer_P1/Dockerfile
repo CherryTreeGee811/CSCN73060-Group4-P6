@@ -9,7 +9,7 @@ RUN apk add --no-cache asio-dev g++ cmake ninja sqlite sqlite-dev
 WORKDIR /src
 COPY WebServer_P1/ .
 RUN mkdir -p build
-RUN cmake -G Ninja -B build -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+RUN cmake -G Ninja -B build
 RUN cmake --build build
 
 # Add compiled binaries to base image to create final image
