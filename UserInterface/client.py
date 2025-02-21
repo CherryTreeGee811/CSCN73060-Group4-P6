@@ -32,7 +32,7 @@ def delete_book():
     if response.status_code != 200:
         print("Some error occurred when trying to delete book!")
     else:
-        print("Book was added successfully")
+        print("Book was deleted successfully")
 
 
 def update_book():
