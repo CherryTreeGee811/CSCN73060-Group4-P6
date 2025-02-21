@@ -34,7 +34,7 @@ jobs:
         run: |
           pwd
           ls
-          cd dist
+          cd UserInterface
           ls
       
       - name: Make compiled EXE available
