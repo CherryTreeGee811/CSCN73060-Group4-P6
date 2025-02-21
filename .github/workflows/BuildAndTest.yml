@@ -44,7 +44,7 @@ jobs:
           python-version: '3.13'
 
       - name: Compile Windows Python Binary From Source
-        shell: bash
+        shell: pwsh
         run: |
           cd UserInterface
           python -m pip install -r requirements.txt
