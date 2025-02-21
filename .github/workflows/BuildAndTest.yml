@@ -45,11 +45,11 @@ jobs:
           python-version: '3.13'
           
       - name: Build and Run Library API
-        shell: bash
+        shell: pwsh
         run: docker compose up -d
 
       - name: Compile Python EXE
-        shell: bash
+        shell: pwsh
         run: |
           cd UserInterface
           python -m pip install -r requirements.txt
