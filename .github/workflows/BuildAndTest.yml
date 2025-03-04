@@ -8,11 +8,50 @@ on:
       - '*'
   workflow_dispatch:
 jobs:
-  BuildAndTest:
+  BuildAPIAndClientUbuntu:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        
+      
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13' 
+    
       - name: Build and Run Library API
         shell: bash
         run: docker compose up -d
+
+      - name: Compile Linux Python Binary From Source
+        shell: bash
+        run: |
+          cd UserInterface
+          python -m pip install -r requirements.txt
+          pyinstaller --name LibraryClient --icon "./icon/libraryclient.ico" --onefile client.py
+      
+      - name: Make Linux Binary Available
+        uses: actions/upload-artifact@v4
+        with:
+          name: Linux_x64
+          path: ./UserInterface/dist/LibraryClient
+
+  BuildClientWindows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Compile Windows Python Binary From Source
+        shell: pwsh
+        run: |
+          cd UserInterface
+          python -m pip install -r requirements.txt
+          pyinstaller --name LibraryClient --icon "./icon/libraryclient.ico" --onefile client.py
+
+      - name: Make Windows Binary Available
+        uses: actions/upload-artifact@v4
+        with:
+          name: Windows_x64
+          path: ./UserInterface/dist/LibraryClient.exe
